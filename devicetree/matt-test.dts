@@ -8,7 +8,7 @@
 #include <dt-bindings/pinctrl/am33xx.h>
 
 
-
+#include "matt-I2C1.dtsi"
 #include "matt-I2C2.dtsi"
 #include "matt-LED.dtsi"
 #include "matt-OCP.dtsi"
