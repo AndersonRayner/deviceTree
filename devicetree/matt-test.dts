@@ -1,0 +1,43 @@
+
+/dts-v1/;
+
+
+#include "am33xx.dtsi"
+#include "am335x-bone-common.dtsi"
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+
+
+#include "matt-I2C2.dtsi"
+#include "matt-LED.dtsi"
+#include "matt-OCP.dtsi"
+#include "matt-PRU.dtsi"
+#include "matt-SPI0.dtsi"
+#include "matt-SPI1.dtsi"
+#include "matt-UART4.dtsi"
+#include "matt-UART5.dtsi"
+
+
+/ {
+	model = "TI AM335x BeagleBone Black";
+	compatible = "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
+};
+
+&ldo3_reg {
+	regulator-min-microvolt = <1800000>;
+	regulator-max-microvolt = <1800000>;
+	regulator-always-on;
+};
+
+&mmc1 {
+	vmmc-supply = <&vmmcsd_fixed>;
+};
+
+&mmc2 {
+	vmmc-supply = <&vmmcsd_fixed>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&emmc_pins>;
+	bus-width = <8>;
+	status = "okay";
+};

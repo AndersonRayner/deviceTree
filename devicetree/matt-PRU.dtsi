@@ -1,0 +1,37 @@
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+
+&am33xx_pinmux {
+	pru_pins: pinmux_pru_pins {
+		pinctrl-single,pins = <
+			0x03c 0x35	/* ecap0_in_pwm0_out.pr1_ecap0_ecap_capin, MODE5 | INPUT_PULLUP | PRU, PPM-sum, SBUS, DSM  */
+
+			0x0e8 0x25	/* lcd_pclk.pr1_pru1_pru_r30_10,       MODE5 | OUTPUT | PRU, CH_1 */
+			0x0e0 0x25	/* lcd_vsync.pr1_pru1_pru_r30_8,       MODE5 | OUTPUT | PRU, CH_2 */
+			0x0ec 0x25	/* lcd_ac_bias_en.pr1_pru1_pru_r30_11, MODE5 | OUTPUT | PRU, CH_3 */
+			0x0e4 0x25	/* lcd_hsync.pr1_pru1_pru_r30_9,       MODE5 | OUTPUT | PRU, CH_4 */
+			0x0bc 0x25	/* lcd_data7.pr1_pru1_pru_r30_7,       MODE5 | OUTPUT | PRU, CH_5 */
+			0x0b8 0x25	/* lcd_data6.pr1_pru1_pru_r30_6,       MODE5 | OUTPUT | PRU, CH_6 */
+			0x0b4 0x25	/* lcd_data5.pr1_pru1_pru_r30_5,       MODE5 | OUTPUT | PRU, CH_7 */
+			0x0b0 0x25	/* lcd_data4.pr1_pru1_pru_r30_4,       MODE5 | OUTPUT | PRU, CH_8 */
+			0x0ac 0x25	/* lcd_data3.pr1_pru1_pru_r30_3,       MODE5 | OUTPUT | PRU, CH_9 */
+			0x0a8 0x25	/* lcd_data2.pr1_pru1_pru_r30_2,       MODE5 | OUTPUT | PRU, CH_10 */
+			0x0a4 0x25	/* lcd_data1.pr1_pru1_pru_r30_1,       MODE5 | OUTPUT | PRU, CH_11 */
+			0x0a0 0x25	/* lcd_data0.pr1_pru1_pru_r30_0,       MODE5 | OUTPUT | PRU, CH_12 */
+
+			BONE_P8_12 (PIN_OUTPUT_PULLDOWN | MUX_MODE6)  /* HC-SR04 TRIG */
+			BONE_P8_16 (PIN_INPUT_PULLDOWN  | MUX_MODE6)  /* HC-SR04 ECHO */
+
+			BONE_P9_25 (PIN_INPUT_PULLDOWN  | MUX_MODE6)  /* MPU9250 INT */
+			>;
+			
+		};
+};
+
+
+&pruss {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pru_pins>;
+	status = "okay";
+};

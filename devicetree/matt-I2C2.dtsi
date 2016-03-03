@@ -1,0 +1,30 @@
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+&am33xx_pinmux {
+    i2c2_pins: pinmux_i2c2_pins {
+            pinctrl-single,pins = <
+            0x178 0x73  /* uart1_ctsn.i2c2_sda, SLEWCTRL_SLOW | INPUT_PULLUP | MODE3 */
+            0x17c 0x73  /* uart1_rtsn.i2c2_scl, SLEWCTRL_SLOW | INPUT_PULLUP | MODE3 */
+            >;
+    };
+};
+
+
+&i2c2 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c2_pins>;
+
+	clock-frequency = <400000>;
+		
+	rtc_cape: rtc@68 {
+	compatible = "dallas,ds1307";
+	reg = <0x68>;
+	};
+};
+
+&rtc {
+	status = "disabled"; /* Disable BBB rtc for cape clock */
+};
+

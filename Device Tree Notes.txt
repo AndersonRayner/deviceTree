@@ -1,0 +1,2 @@
+How to build the DTB
+	https://github.com/mirkix/BBBMINI/issues/9

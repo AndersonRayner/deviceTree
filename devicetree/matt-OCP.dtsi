@@ -1,0 +1,35 @@
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+
+
+&am33xx_pinmux {
+    ctrl_pins: pinmux_ctrl_pins {
+            pinctrl-single,pins = <
+            BONE_P9_15  0xf   /* gpio1_15 Reset cards      | OUTPUT | NA | MODE7 */
+            >;
+    };
+
+    timing_pins: pinmux_timing_pins {
+            pinctrl-single,pins = <
+            BONE_P8_11 0x7    /* gpio1_13 sync out 100 Hz | OUTPUT | PULLDOWN |   */
+            >;
+    };
+};
+
+
+&ocp {
+		ctrl-pins {
+			compatible = "bone-pinmux-helper";
+			pinctrl-names = "default";
+			pinctrl-0 = <&ctrl_pins>;
+			status = "okay";
+		};
+
+		timing-pins {
+			compatible = "bone-pinmux-helper";
+			pinctrl-names = "default";
+			pinctrl-0 = <&timing_pins>;
+			status = "okay";
+		};
+};

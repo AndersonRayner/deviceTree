@@ -1,0 +1,37 @@
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+
+&am33xx_pinmux {
+	spi1_pins: pinmux_spi1_pins {
+		pinctrl-single,pins = <
+			BONE_P9_31  (PIN_INPUT_PULLUP  | MUX_MODE3)   /* P9_31: mcasp0_aclkx.spi1_sclk */		
+			BONE_P9_29  (PIN_INPUT_PULLUP  | MUX_MODE3)   /* P9_29: mcasp0_fsx.spi1_d0 */
+			BONE_P9_30  (PIN_OUTPUT_PULLUP | MUX_MODE3)   /* P9_30: mcasp0_axr0.spi1_d1 */
+			BONE_P9_28  (PIN_OUTPUT_PULLUP | MUX_MODE3)   /* P9_28: mcasp0_ahclkr.spi1_cs0 */
+			BONE_P9_42A (PIN_OUTPUT_PULLUP | MUX_MODE2)   /* P9_42: ecap0_in_pwm0_out.spi1_cs1 */
+		>;
+	};
+};
+
+&spi1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi1_pins>;
+	status = "okay";
+
+	spi1_0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0>;
+		spi-max-frequency = <24000000>;
+		compatible = "spidev";
+	};
+
+	spi1_1 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <1>;
+		spi-max-frequency = <24000000>;
+		compatible = "spidev";
+	};
+};

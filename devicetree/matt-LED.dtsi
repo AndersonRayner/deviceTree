@@ -1,0 +1,26 @@
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+
+&am33xx_pinmux {
+	capeled_pins: pinmux_capeled_pins {
+            pinctrl-single,pins = <
+            0x1a4 0x7   /* gpio3_19 Cape led */
+            >;
+    };
+};
+
+&ocp {
+		cape-leds {
+			compatible = "gpio-leds";
+			pinctrl-names = "default";
+			pinctrl-0 = <&capeled_pins>;
+			
+			led0 {
+				label = "cape:white:activity";
+				gpios = <&gpio3 19 0>;	/* Why is the gpio here from 1 to 4? Not sense...*/
+				default-state = "off";
+				linux,default-trigger = "heartbeat";
+			};
+		};
+};

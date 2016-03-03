@@ -1,0 +1,37 @@
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+
+
+&am33xx_pinmux {
+	spi0_pins: pinmux_spi0_pins {
+		pinctrl-single,pins = <
+			BONE_P9_22 (PIN_INPUT_PULLUP | MUX_MODE0)			/* P9_22: spi0_sclk.spi0_sclk */
+			BONE_P9_21 (PIN_INPUT_PULLUP | MUX_MODE0)			/* P9_21: spi0_d0.spi0_d0 */
+			BONE_P9_18 (PIN_OUTPUT_PULLUP | MUX_MODE0)			/* P9_18: spi0_d1.spi0_d1 */
+			/*BONE_P9_17 (PIN_OUTPUT_PULLUP | MUX_MODE0)*/			/* P9_17: spi0_cs0.spi0_cs0 */
+
+            /* setup a dummy CS for the SPI driver to use, then setup pin modes for the two real CS lines to set them pull-up */
+            /*0x054      0x07 */ /* led pin, dummy CS */
+			BONE_P8_26 0x37  /* LSM9DSO_AM CS P9_17 */
+            BONE_P9_17 0x37  /* LSM9DSO_AM CS P9_17 */
+            BONE_P8_09 0x37  /* LSM9DSO_G CS P8_9 */
+		>;
+	};
+};
+
+
+&spi0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi0_pins>;
+	status = "okay";
+	/*ti,pindir-d0-out-d1-in = <1>;*/ /* Swaps function of D0 and D1 */
+
+	spi0_0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		spi-max-frequency = <24000000>;
+		reg = <0>;
+		compatible = "linux,spidev";
+	};
+};
+
